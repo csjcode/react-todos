@@ -11,11 +11,14 @@ var Hello = React.createClass({
   mixins: [ ReactFire ], // mixin: methods on 1 object copied to another  (ie. copy ReactFire objects to React component)
   getInitialState: function(){
     return {
-      items:{}
+      items:{},
+      loaded: false
     }
   },
   componentWillMount: function(){ // react native method to run one time only when app instantiated
-    this.bindAsObject(new Firebase(rootUrl + 'items/'), 'items'); // create new firebase object at our URL, any data from that is bound to our component; after line is run we'd expect: this.state.items => {}
+    fb = new Firebase(rootUrl + 'items/')
+    this.bindAsObject(fb, 'items'); // create new firebase object at our URL, any data from that is bound to our component; after line is run we'd expect: this.state.items => {}
+    fb.on('value', this.handleDataLoaded);
   },
   render: function() {
     // console.log(this.state); // test connection to firebase
@@ -26,9 +29,15 @@ var Hello = React.createClass({
           To-Do List
         </h2>
         <Header itemsStore={this.firebaseRefs.items} />
-        <List items={this.state.items} />
+        <hr />
+          <div className={"content " + (this.state.loaded ? 'loaded': '')}>
+            <List items={this.state.items} />
+          </div>
       </div>
     </div>
+  },
+  handleDataLoaded: function(){
+    this.setState({loaded:true})
   }
 });
 
