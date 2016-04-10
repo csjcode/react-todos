@@ -21,11 +21,17 @@ module.exports = React.createClass({
                Add
             </button>
          </span>
-      
+
       </div>
    },
    handleClick: function(){
-      console.log(this.state.text);
+      // console.log(this.state.text);
+      this.props.itemsStore.push({
+         text: this.state.text, // text from the input
+         done: false // if the todo has been done
+      })
+
+      this.setState({text:''}) // this will clear out input box after the add button is clicked
       // send value of text input to firebase
       // console.log('I was clicked');
    },

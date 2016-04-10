@@ -13,12 +13,13 @@ var Hello = React.createClass({
   },
   render: function() {
     // console.log(this.state); // test connection to firebase
+      /* below: <Header itemsStore={this.firebaseRefs.items} /> from the new Firebase object line above*/
     return <div className="row panel panel-default">
       <div className="col-md-8 col-md-offset-2">
         <h2 className="text-center">
           To-Do List
         </h2>
-        <Header />
+        <Header itemsStore={this.firebaseRefs.items} />
       </div>
     </div>
   }
