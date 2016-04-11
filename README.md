@@ -1,4 +1,4 @@
-React TODOs Demo
+React TODOs Demo - setup and ideas 
 ====
 
 Use this as a starting point for: [Build Web Apps with React JS and Flux](https://www.udemy.com/learn-and-understand-reactjs/) course on Udemy.com.
