@@ -6,7 +6,8 @@ module.exports = React.createClass({
    getInitialState: function(){
      return {
        text: this.props.item.text,
-       done: this.props.item.done
+       done: this.props.item.done,
+       textChanged: false
      }
    },
    componentWillMount: function(){
@@ -18,25 +19,48 @@ module.exports = React.createClass({
                <input
                   type="checkbox"
                   checked={this.state.done}
-                  onChange={this.HandleDoneChange}
+                  onChange={this.handleDoneChange}
                      />
          </span>
          <input type="text"
             className="form-control"
             value={this.state.text}
+            onChange={this.handleTextChanged}
             />
          <span className="input-group-btn">
+            {this .changesButtons()};
             <button
-               className="btn btn-default">
+               className="btn btn-default"
+               onClick={this.handleDeleteClick}
+               >
                Delete
             </button>
          </span>
       </div>
    },
-   HandleDoneChange: function(event){
+   changesButtons: function(){
+      if(!this.state.textChanged){
+         return null
+      } else {
+         return <span>
+            <button className="btn btn-default">Save</button>
+            <button className="btn btn-default">Undo</button>
+         </span>
+      }
+   },
+   handleTextChanged: function(event){
+      this.setState({
+         text:event.target.value,
+         textChanged:true
+      })
+   },
+   handleDoneChange: function(event){
       var update = {done: event.target.checked}
       this.setState(update);
       this.fb.update(update);
+   },
+   handleDeleteClick: function(){
+      this.fb.remove();
    }
 });
 
