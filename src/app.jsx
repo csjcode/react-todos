@@ -16,9 +16,9 @@ var Hello = React.createClass({
     }
   },
   componentWillMount: function(){ // react native method to run one time only when app instantiated
-    fb = new Firebase(rootUrl + 'items/')
-    this.bindAsObject(fb, 'items'); // create new firebase object at our URL, any data from that is bound to our component; after line is run we'd expect: this.state.items => {}
-    fb.on('value', this.handleDataLoaded);
+    this.fb = new Firebase(rootUrl + 'items/')
+    this.bindAsObject(this.fb, 'items'); // create new firebase object at our URL, any data from that is bound to our component; after line is run we'd expect: this.state.items => {}
+    this.fb.on('value', this.handleDataLoaded);
   },
   render: function() {
     // console.log(this.state); // test connection to firebase
@@ -32,9 +32,33 @@ var Hello = React.createClass({
         <hr />
           <div className={"content " + (this.state.loaded ? 'loaded': '')}>
             <List items={this.state.items} />
+            {this.deleteButton()}
           </div>
       </div>
     </div>
+  },
+  deleteButton: function(){
+    if(!this.state.loaded){
+      return
+    } else {
+      return <div className="text-center clear-complete">
+        <hr />
+        <button
+          type="button"
+          onClick={this.onDeleteDoneClick}
+          className="btn btn-default">
+          Clear Complete
+        </button>
+      </div>
+    }
+    this.setState({loaded:true})
+  },
+  onDeleteDoneClick: function(){
+    for (var key in this.state.items){
+      if (this.state.items[key].done === true){
+        this.fb.child(key).remove();
+      }
+    }
   },
   handleDataLoaded: function(){
     this.setState({loaded:true})
