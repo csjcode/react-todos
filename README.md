@@ -1,28 +1,16 @@
-ReactStarter
+React TODOs Demo
 ====
 
-Use this as a starting point for working on chapters of the [Build Web Apps with React JS and Flux](https://www.udemy.com/learn-and-understand-reactjs/) course on Udemy.com.
+Use this as a starting point for: [Build Web Apps with React JS and Flux](https://www.udemy.com/learn-and-understand-reactjs/) course on Udemy.com.
 
 ---
 
 ###Getting Started###
-
-There are two methods for getting started with this repo.
-
-####Familiar with Git?#####
-Checkout this repo, install dependencies, then start the gulp process with the following:
+The basics of getting started were supplied by a build and instruction from the Udemy teacher Stephen Grider in his React class. I'm getting the basics down here and then building in some more options later.
 
 ```
 	> git clone https://github.com/StephenGrider/ReactStarter.git
 	> cd ReactStarter
-	> npm install
-	> gulp
-```
-
-####Not Familiar with Git?#####
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
-
-```
 	> npm install
 	> gulp
 ```
